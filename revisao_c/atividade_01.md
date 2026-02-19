@@ -189,9 +189,9 @@ Programa encerrado.
 
 ---
 
-## Perguntas para Defesa (Esteja Preparado!)
+## Perguntas:
 
-Durante a apresentação/entrega, você deverá ser capaz de responder perguntas como:
+Incluir no documento da entrega:
 
 1. **Por que usamos `char*` para o nome em vez de `char nome[50]`?**  
    Qual a vantagem e desvantagem de cada abordagem?
@@ -248,9 +248,13 @@ Durante a apresentação/entrega, você deverá ser capaz de responder perguntas
 
 ## Forma de Entrega
 
-- Arquivo fonte: `atividade_01_nome_ra.c`
-- O código deve compilar sem erros com: `gcc -Wall -o atividade atividade_01_nome_ra.c`
-- Data limite: *A ser definida pelo professor*
+- Entregar um aquivo PDF via Moodle:
+    - Inlcuir o nome dos integrantes do grupo em ordem afabética e RAs
+    - Inlcuir o código-fonte no documento ou link para o repositório
+    - Incluir prints de testes realizados
+    - Icnluir as respostas das perguntas
+- Não é preciso entregar o código-fonte, a não ser que use um repositório (recomendado) para a equipe
+- Seu código deve compilar sem erros com, exemplo: `gcc -Wall -o atividade atividade_01_nome_ra.c` se o professor quiser rodá-lo integralmente.
 
 ---
 
