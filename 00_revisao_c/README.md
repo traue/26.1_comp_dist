@@ -22,6 +22,8 @@ Este material é uma revisão didática dos principais conceitos da linguagem C,
 14. [Matriz Dinâmica com **](#14-matriz-dinâmica-com-)
 15. [Vetor de Strings](#15-vetor-de-strings)
 
+**ATIVIDADE**: [Disponível aqui](atividade.md)
+
 ---
 
 ## 1. Vetores (Arrays)
