@@ -1,4 +1,4 @@
-# ⚔️ Batalha de palavras em rede
+# Batalha de palavras em rede
 
 Jogo multiplayer baseado em texto, implementado em C com **Sockets TCP** e **pthreads**.
 
