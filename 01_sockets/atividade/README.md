@@ -22,7 +22,7 @@ O jogo tem **5 rodadas**. Ganha quem tiver mais pontos.
 
 ---
 
-## Estrutura sugerida para o Projeto
+## Estrutura sugerida para o projeto
 
 ```
 atividade/
