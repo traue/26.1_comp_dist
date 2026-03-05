@@ -1,4 +1,4 @@
-# 🧮 Parte 3 — Calculadora Remota com Sockets em C
+# Parte 3 — Calculadora Remota com Sockets em C
 
 ## Objetivo
 
@@ -155,9 +155,9 @@ Até mais!
 
 ---
 
-## O que observar neste projeto
+## Important observar
 
-1. **Protocolo de aplicação** — formato de mensagem definido (número-operador-número)
+1. **Protocolo de aplicação** — formato de mensgem definido (número-operador-número)
 2. **Validação no servidor** — o servidor verifica operadores inválidos, divisão por zero etc.
 3. **Sessão contínua** — o cliente mantém a conexão aberta para múltiplas operações (diferente da Parte 1, onde era uma mensagem e encerrava)
 4. **Servidor sequencial** — atende um cliente por vez; quando termina, aceita o próximo
