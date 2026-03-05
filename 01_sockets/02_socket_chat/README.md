@@ -1,4 +1,4 @@
-# 💬 Parte 2 — Chat Multiclientes com Sockets em C
+# Parte 2 — Chat Multiclientes com Sockets em C
 
 ## Objetivo
 
@@ -203,7 +203,7 @@ Para sair, o cliente pode digitar `sair` ou pressionar `Ctrl+C`.
 
 ---
 
-## Limitações (de propósito)
+## Limitações
 
 Este é um exemplo **didático**. Em produção, você precisaria lidar com:
 
@@ -222,6 +222,4 @@ Este é um exemplo **didático**. Em produção, você precisaria lidar com:
 | `chat_cliente.c`    | Cliente interativo com `select()` em stdin + socket |
 | `Makefile`          | Compilação dos exemplos                            |
 
----
 
-> **Próxima aula**: servidor com threads (`pthread`), protocolos de mensagem customizados e transferência de arquivos.
