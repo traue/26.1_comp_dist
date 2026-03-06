@@ -6,18 +6,19 @@
 
 ## Índice
 
-1. [O que é este projeto?](#-o-que-é-este-projeto)
-2. [Conceitos Fundamentais](#-conceitos-fundamentais)
-3. [Como compilar e executar](#-como-compilar-e-executar)
-4. [Estrutura do Projeto](#-estrutura-do-projeto)
-5. [Como o servidor funciona (passo a passo)](#-como-o-servidor-funciona-passo-a-passo)
-6. [O Protocolo HTTP simplificado](#-o-protocolo-http-simplificado)
-7. [Fluxo de uma Requisição](#-fluxo-de-uma-requisição)
-8. [Glossário de Funções de Socket](#-glossário-de-funções-de-socket)
-9. [Exercícios Sugeridos](#-exercícios-sugeridos)
+1. [O que é este projeto?](#o-que-e-este-projeto)
+2. [Conceitos Fundamentais](#conceitos-fundamentais)
+3. [Como compilar e executar](#como-compilar-e-executar)
+4. [Estrutura do Projeto](#estrutura-do-projeto)
+5. [Como o servidor funciona (passo a passo)](#como-o-servidor-funciona-passo-a-passo)
+6. [O Protocolo HTTP simplificado](#o-protocolo-http-simplificado)
+7. [Fluxo de uma Requisição](#fluxo-de-uma-requisicao)
+8. [Glossário de Funções de Socket](#glossario-de-funcoes-de-socket)
+9. [Exercícios Sugeridos](#exercicios-sugeridos)
 
 ---
 
+<a id="o-que-e-este-projeto"></a>
 ## 🎯 O que é este projeto?
 
 Este é um **servidor HTTP simplificado** que:
@@ -33,6 +34,7 @@ Este é um **servidor HTTP simplificado** que:
 
 ---
 
+<a id="conceitos-fundamentais"></a>
 ## Conceitos Fundamentais
 
 ### O que é um Socket?
@@ -62,6 +64,7 @@ O HTTP funciona **sobre** o TCP — ou seja, usamos TCP como "meio de transporte
 
 ---
 
+<a id="como-compilar-e-executar"></a>
 ## Como compilar e executar
 
 ### Pré-requisitos
@@ -104,6 +107,7 @@ Pressione `Ctrl+C` no terminal onde o servidor está rodando.
 
 ---
 
+<a id="estrutura-do-projeto"></a>
 ## Estrutura do Projeto
 
 ```
@@ -126,6 +130,7 @@ socket_http_server/
 
 ---
 
+<a id="como-o-servidor-funciona-passo-a-passo"></a>
 ## 🔧 Como o servidor funciona (passo a passo)
 
 ### Visão Geral: O ciclo de vida do servidor
@@ -223,6 +228,7 @@ close(socket_cliente);  // Encerra a comunicação com o cliente
 
 ---
 
+<a id="o-protocolo-http-simplificado"></a>
 ## O Protocolo HTTP simplificado
 
 ### Requisição HTTP (o que o navegador envia)
@@ -280,6 +286,7 @@ O servidor precisa informar ao navegador **que tipo de conteúdo** está enviand
 
 ---
 
+<a id="fluxo-de-uma-requisicao"></a>
 ## Fluxo de uma Requisição
 
 ```
@@ -316,6 +323,7 @@ O servidor precisa informar ao navegador **que tipo de conteúdo** está enviand
 
 ---
 
+<a id="glossario-de-funcoes-de-socket"></a>
 ## Glossário de Funções de Socket
 
 | Função         | Descrição                                                       |
@@ -334,6 +342,7 @@ O servidor precisa informar ao navegador **que tipo de conteúdo** está enviand
 
 ---
 
+<a id="exercicios-sugeridos"></a>
 ## Exercícios sugeridos para treinar / estudar (não valem nota0)
 
 Para aprofundar o aprendizado, tente implementar estas melhorias:
