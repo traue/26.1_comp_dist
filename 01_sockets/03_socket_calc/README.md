@@ -1,11 +1,8 @@
-# Parte 3 — Calculadora Remota com Sockets em C
+# 🧮 Parte 3 — Calculadora Remota com Sockets em C
 
 ## Objetivo
 
-Implementar uma **calculadora cliente-servidor** onde o cliente envia expressões matemáticas e o **servidor calcula e retorna o resultado**. O cliente funciona como um terminal interativo, enviando operações em loop até decidir sair.
-
-Assim:
-
+Implementar uma **calculadora cliente-servidor** onde o cliente envia expressões matemáticas e o **servidor calcula e retorna o resultado**. O cliente funciona como um terminal interativo — envia operações em loop até decidir sair.
 
 ```
 ┌──────────────┐     "10 + 3"     ┌──────────────┐
@@ -18,7 +15,7 @@ Assim:
 
 ---
 
-## Conceito-chave: Protocolo de aplicação
+## Conceito-chave: Protocolo de Aplicação
 
 Até agora, enviamos texto livre entre cliente e servidor. Neste projeto, definimos um **protocolo simples** — regras sobre o formato das mensagens:
 
@@ -91,7 +88,7 @@ main()
 
 ---
 
-## A função `sscanf()` — parse simples
+## A função `sscanf()` — Parse simples
 
 No servidor, usamos `sscanf()` para extrair os componentes da expressão:
 
@@ -137,7 +134,7 @@ gcc -Wall -Wextra -o calc_cliente calc_cliente.c
 ### Exemplo de sessão
 
 ```
-Conectanndo a 127.0.0.1:9090...
+Conectando a 127.0.0.1:9090...
 ========================================
   Calculadora Remota - Conectado!
   Formato: <num> <op> <num>
@@ -167,7 +164,7 @@ Até mais!
 
 ---
 
-## Arquivos deste prjeto
+## Arquivos desta pasta
 
 | Arquivo            | Descrição                                         |
 |--------------------|---------------------------------------------------|

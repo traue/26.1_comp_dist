@@ -1,41 +1,39 @@
-# Servidor HTTP em C usando Sockets
+# 🌐 Servidor HTTP em C usando Sockets
 
 > **Projeto Acadêmico** — Um servidor HTTP funcional implementado do zero em C puro, usando apenas a API de sockets do sistema operacional (POSIX). Nenhuma biblioteca externa é utilizada.
 
 ---
 
-## Índice
+## 📖 Índice
 
-1. [O que é este projeto?](#o-que-e-este-projeto)
-2. [Conceitos Fundamentais](#conceitos-fundamentais)
-3. [Como compilar e executar](#como-compilar-e-executar)
-4. [Estrutura do Projeto](#estrutura-do-projeto)
-5. [Como o servidor funciona (passo a passo)](#como-o-servidor-funciona-passo-a-passo)
-6. [O Protocolo HTTP simplificado](#o-protocolo-http-simplificado)
-7. [Fluxo de uma Requisição](#fluxo-de-uma-requisicao)
-8. [Glossário de Funções de Socket](#glossario-de-funcoes-de-socket)
-9. [Exercícios Sugeridos](#exercicios-sugeridos)
+1. [O que é este projeto?](#-o-que-é-este-projeto)
+2. [Conceitos Fundamentais](#-conceitos-fundamentais)
+3. [Como compilar e executar](#-como-compilar-e-executar)
+4. [Estrutura do Projeto](#-estrutura-do-projeto)
+5. [Como o servidor funciona (passo a passo)](#-como-o-servidor-funciona-passo-a-passo)
+6. [O Protocolo HTTP simplificado](#-o-protocolo-http-simplificado)
+7. [Fluxo de uma Requisição](#-fluxo-de-uma-requisição)
+8. [Glossário de Funções de Socket](#-glossário-de-funções-de-socket)
+9. [Exercícios Sugeridos](#-exercícios-sugeridos)
 
 ---
 
-<a id="o-que-e-este-projeto"></a>
 ## 🎯 O que é este projeto?
 
 Este é um **servidor HTTP simplificado** que:
 
-- Aceita conexões de navegadores web reais (Chrome, Firefox, Safari, etc.)
-- Interpreta requisições HTTP `GET`
-- Serve arquivos estáticos (HTML, CSS, JavaScript, imagens)
-- Responde com códigos HTTP corretos (200, 404, 405, 500)
-- Permite configurar a porta via argumento de linha de comando
-- Inclui uma aplicação web de demonstração para teste
+- ✅ Aceita conexões de navegadores web reais (Chrome, Firefox, Safari, etc.)
+- ✅ Interpreta requisições HTTP `GET`
+- ✅ Serve arquivos estáticos (HTML, CSS, JavaScript, imagens)
+- ✅ Responde com códigos HTTP corretos (200, 404, 405, 500)
+- ✅ Permite configurar a porta via argumento de linha de comando
+- ✅ Inclui uma aplicação web de demonstração para teste
 
 **O objetivo é entender como a comunicação entre cliente e servidor funciona "por baixo dos panos"**, sem frameworks ou bibliotecas que abstraiam os detalhes.
 
 ---
 
-<a id="conceitos-fundamentais"></a>
-## Conceitos Fundamentais
+## 📚 Conceitos Fundamentais
 
 ### O que é um Socket?
 
@@ -64,8 +62,7 @@ O HTTP funciona **sobre** o TCP — ou seja, usamos TCP como "meio de transporte
 
 ---
 
-<a id="como-compilar-e-executar"></a>
-## Como compilar e executar
+## 🚀 Como compilar e executar
 
 ### Pré-requisitos
 
@@ -107,8 +104,7 @@ Pressione `Ctrl+C` no terminal onde o servidor está rodando.
 
 ---
 
-<a id="estrutura-do-projeto"></a>
-## Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
 socket_http_server/
@@ -130,12 +126,9 @@ socket_http_server/
 
 ---
 
-<a id="como-o-servidor-funciona-passo-a-passo"></a>
 ## 🔧 Como o servidor funciona (passo a passo)
 
-### Visão Geral: O ciclo de vida do servidor
-
-
+### Visão Geral: O Ciclo de Vida do Servidor
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -161,8 +154,7 @@ socket_http_server/
 └─────────────────────────────────────────────────────────┘
 ```
 
-
-### Passo 1: sriação do socket — `socket()`
+### Passo 1: Criação do Socket — `socket()`
 
 ```c
 int socket_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -176,9 +168,7 @@ int socket_fd = socket(AF_INET, SOCK_STREAM, 0);
 
 **Retorna**: Um "file descriptor" (número inteiro) que identifica o socket. Em Unix, *tudo é arquivo* — sockets também!
 
-### Passo 2: associar endereço com `bind()`
-
-
+### Passo 2: Associar endereço — `bind()`
 
 ```c
 struct sockaddr_in endereco;
@@ -193,7 +183,7 @@ bind(socket_fd, (struct sockaddr *)&endereco, sizeof(endereco));
 - `htons()` = **H**ost **TO** **N**etwork **S**hort — converte a porta para a ordem de bytes da rede
 - `htonl()` = **H**ost **TO** **N**etwork **L**ong — mesma coisa, mas para endereços de 32 bits
 
-### Passo 3: modo escuta com `listen()`
+### Passo 3: Modo escuta — `listen()`
 
 ```c
 listen(socket_fd, 10);
@@ -202,7 +192,7 @@ listen(socket_fd, 10);
 - O `10` é o **backlog**: tamanho máximo da fila de conexões pendentes
 - Após `listen()`, o socket está pronto para receber conexões
 
-### Passo 4: aceitar conexão cpm `accept()`
+### Passo 4: Aceitar conexão — `accept()`
 
 ```c
 int socket_cliente = accept(socket_servidor, (struct sockaddr *)&endereco_cliente, &tamanho);
@@ -228,8 +218,7 @@ close(socket_cliente);  // Encerra a comunicação com o cliente
 
 ---
 
-<a id="o-protocolo-http-simplificado"></a>
-## O Protocolo HTTP simplificado
+## 📨 O Protocolo HTTP simplificado
 
 ### Requisição HTTP (o que o navegador envia)
 
@@ -262,7 +251,7 @@ Server: MeuServidorHTTP/1.0      ← Nome do servidor
 <html>...</html>
 ```
 
-### Códigos de status HTTP comuns
+### Códigos de Status HTTP comuns
 
 | Código | Significado              | Quando acontece                          |
 |--------|--------------------------|------------------------------------------|
@@ -270,7 +259,6 @@ Server: MeuServidorHTTP/1.0      ← Nome do servidor
 | `404`  | Not Found                | Arquivo não existe no servidor           |
 | `405`  | Method Not Allowed       | Método não suportado (ex: POST)          |
 | `500`  | Internal Server Error    | Erro interno no servidor                 |
-
 
 ### Tipos MIME
 
@@ -286,8 +274,7 @@ O servidor precisa informar ao navegador **que tipo de conteúdo** está enviand
 
 ---
 
-<a id="fluxo-de-uma-requisicao"></a>
-## Fluxo de uma Requisição
+## 🔄 Fluxo de uma Requisição
 
 ```
 ┌──────────────┐                              ┌──────────────────┐
@@ -323,8 +310,7 @@ O servidor precisa informar ao navegador **que tipo de conteúdo** está enviand
 
 ---
 
-<a id="glossario-de-funcoes-de-socket"></a>
-## Glossário de Funções de Socket
+## 📖 Glossário de Funções de Socket
 
 | Função         | Descrição                                                       |
 |----------------|-----------------------------------------------------------------|
@@ -342,8 +328,7 @@ O servidor precisa informar ao navegador **que tipo de conteúdo** está enviand
 
 ---
 
-<a id="exercicios-sugeridos"></a>
-## Exercícios sugeridos para treinar / estudar (não valem nota0)
+## 🧪 Exercícios Sugeridos
 
 Para aprofundar o aprendizado, tente implementar estas melhorias:
 
@@ -357,15 +342,21 @@ Para aprofundar o aprendizado, tente implementar estas melhorias:
 5. **Listagem de diretório** — Se o caminho for um diretório, gere um HTML listando os arquivos
 6. **Arquivo de configuração** — Leia a porta e o diretório web de um arquivo `config.txt`
 
-### Nível Aaançado
+### Nível Avançado
 7. **Multi-threading** — Use `pthread_create()` para atender múltiplos clientes simultaneamente
 8. **Keep-Alive** — Implemente conexões persistentes (HTTP/1.1 Connection: keep-alive)
 9. **HTTPS** — Adicione suporte a TLS/SSL usando a biblioteca OpenSSL
 
 ---
 
-## Referências
+## 📝 Referências
 
 - [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/) — O melhor guia de sockets em C
 - [RFC 2616 - HTTP/1.1](https://www.rfc-editor.org/rfc/rfc2616) — Especificação oficial do HTTP/1.1
 - [man pages: socket(2)](https://man7.org/linux/man-pages/man2/socket.2.html) — Documentação oficial das system calls
+
+---
+
+## 📄 Licença
+
+Projeto acadêmico para fins educacionais. Uso livre para aprendizado.

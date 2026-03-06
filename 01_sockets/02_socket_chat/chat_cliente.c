@@ -22,7 +22,7 @@
 #include <errno.h>
 
 #define PORTA         8080
-#define SERVIDOR_IP   "127.0.0.1"
+#define SERVIDOR_IP   "172.20.10.1"
 #define BUFFER_SIZE   2048
 #define NOME_SIZE     32
 
