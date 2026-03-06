@@ -1,4 +1,4 @@
-# 🔌 Parte 1 — Introdução a Sockets em C
+# Parte 1 — Introdução a Sockets em C
 
 ## O que são Sockets?
 
