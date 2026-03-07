@@ -1,4 +1,4 @@
-# 🧮 Parte 3 — Calculadora Remota com Sockets em C
+# Parte 3 — Calculadora Remota com Sockets em C
 
 ## Objetivo
 
@@ -15,11 +15,11 @@ Implementar uma **calculadora cliente-servidor** onde o cliente envia expressõe
 
 ---
 
-## Conceito-chave: Protocolo de Aplicação
+## Conceito-chave: protocolo de aplicação
 
 Até agora, enviamos texto livre entre cliente e servidor. Neste projeto, definimos um **protocolo simples** — regras sobre o formato das mensagens:
 
-### Protocolo da Calculadora
+### Protocolo da calculadora
 
 | Direção | Formato | Exemplo |
 |---------|---------|---------|
@@ -88,7 +88,7 @@ main()
 
 ---
 
-## A função `sscanf()` — Parse simples
+## A função `sscanf()` — parse simples
 
 No servidor, usamos `sscanf()` para extrair os componentes da expressão:
 
