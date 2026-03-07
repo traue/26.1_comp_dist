@@ -1,10 +1,10 @@
-# 🌐 Servidor HTTP em C usando Sockets
+# Servidor HTTP em C usando Sockets
 
 > **Projeto Acadêmico** — Um servidor HTTP funcional implementado do zero em C puro, usando apenas a API de sockets do sistema operacional (POSIX). Nenhuma biblioteca externa é utilizada.
 
 ---
 
-## 📖 Índice
+## Índice
 
 1. [O que é este projeto?](#-o-que-é-este-projeto)
 2. [Conceitos Fundamentais](#-conceitos-fundamentais)
@@ -18,22 +18,22 @@
 
 ---
 
-## 🎯 O que é este projeto?
+## O que é este projeto?
 
 Este é um **servidor HTTP simplificado** que:
 
-- ✅ Aceita conexões de navegadores web reais (Chrome, Firefox, Safari, etc.)
-- ✅ Interpreta requisições HTTP `GET`
-- ✅ Serve arquivos estáticos (HTML, CSS, JavaScript, imagens)
-- ✅ Responde com códigos HTTP corretos (200, 404, 405, 500)
-- ✅ Permite configurar a porta via argumento de linha de comando
-- ✅ Inclui uma aplicação web de demonstração para teste
+- Aceita conexões de navegadores web reais (Chrome, Firefox, Safari, etc.)
+- Interpreta requisições HTTP `GET`
+- Serve arquivos estáticos (HTML, CSS, JavaScript, imagens)
+- Responde com códigos HTTP corretos (200, 404, 405, 500)
+- Permite configurar a porta via argumento de linha de comando
+- Inclui uma aplicação web de demonstração para teste
 
-**O objetivo é entender como a comunicação entre cliente e servidor funciona "por baixo dos panos"**, sem frameworks ou bibliotecas que abstraiam os detalhes.
+**O objetivo é entender como a counicação entre cliente e servidor funciona "por baixo dos panos"**, sem frameworks ou bibliotecas que abstraiam os detalhes.
 
 ---
 
-## 📚 Conceitos Fundamentais
+## Conceitos fundamentais
 
 ### O que é um Socket?
 
@@ -128,7 +128,7 @@ socket_http_server/
 
 ## 🔧 Como o servidor funciona (passo a passo)
 
-### Visão Geral: O Ciclo de Vida do Servidor
+### Visão Geral: o Ciclo de Vida do Servidor
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -154,7 +154,7 @@ socket_http_server/
 └─────────────────────────────────────────────────────────┘
 ```
 
-### Passo 1: Criação do Socket — `socket()`
+### Passo 1: criação do Socket — `socket()`
 
 ```c
 int socket_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -202,7 +202,7 @@ int socket_cliente = accept(socket_servidor, (struct sockaddr *)&endereco_client
 - Retorna um **novo socket** exclusivo para comunicação com aquele cliente
 - O socket original continua disponível para novas conexões
 
-### Passo 5-7: Ler, processar e responder
+### Passo 5-7: ler, processar e responder
 
 ```c
 read(socket_cliente, buffer, tamanho);    // Lê a requisição
@@ -210,7 +210,7 @@ read(socket_cliente, buffer, tamanho);    // Lê a requisição
 write(socket_cliente, resposta, tamanho);  // Envia a resposta
 ```
 
-### Passo 8: Fechar conexão
+### Passo 8: fechar conexão
 
 ```c
 close(socket_cliente);  // Encerra a comunicação com o cliente
@@ -218,7 +218,7 @@ close(socket_cliente);  // Encerra a comunicação com o cliente
 
 ---
 
-## 📨 O Protocolo HTTP simplificado
+## O Protocolo HTTP simplificado
 
 ### Requisição HTTP (o que o navegador envia)
 
@@ -251,7 +251,7 @@ Server: MeuServidorHTTP/1.0      ← Nome do servidor
 <html>...</html>
 ```
 
-### Códigos de Status HTTP comuns
+### Códigos de status HTTP comuns
 
 | Código | Significado              | Quando acontece                          |
 |--------|--------------------------|------------------------------------------|
@@ -274,7 +274,7 @@ O servidor precisa informar ao navegador **que tipo de conteúdo** está enviand
 
 ---
 
-## 🔄 Fluxo de uma Requisição
+## Fluxo de uma requisição
 
 ```
 ┌──────────────┐                              ┌──────────────────┐
@@ -310,7 +310,7 @@ O servidor precisa informar ao navegador **que tipo de conteúdo** está enviand
 
 ---
 
-## 📖 Glossário de Funções de Socket
+## Glossário de funções de socket
 
 | Função         | Descrição                                                       |
 |----------------|-----------------------------------------------------------------|
@@ -328,21 +328,21 @@ O servidor precisa informar ao navegador **que tipo de conteúdo** está enviand
 
 ---
 
-## 🧪 Exercícios Sugeridos
+## Exercícios sugeridos
 
 Para aprofundar o aprendizado, tente implementar estas melhorias:
 
-### Nível Básico
+### Nível básico
 1. **Adicionar mais tipos MIME** — Adicione suporte a `.mp3`, `.mp4`, `.pdf`
 2. **Página 404 personalizada** — Crie um arquivo `404.html` na pasta `www/` e sirva-o ao invés da página embutida no código
 3. **Logging em arquivo** — Salve os logs em um arquivo `server.log` além de imprimir no terminal
 
-### Nível Intermediário
+### Nível intermediário
 4. **Suporte a POST** — Leia o corpo da requisição POST e exiba no terminal
 5. **Listagem de diretório** — Se o caminho for um diretório, gere um HTML listando os arquivos
 6. **Arquivo de configuração** — Leia a porta e o diretório web de um arquivo `config.txt`
 
-### Nível Avançado
+### Nível avançado
 7. **Multi-threading** — Use `pthread_create()` para atender múltiplos clientes simultaneamente
 8. **Keep-Alive** — Implemente conexões persistentes (HTTP/1.1 Connection: keep-alive)
 9. **HTTPS** — Adicione suporte a TLS/SSL usando a biblioteca OpenSSL
@@ -354,9 +354,3 @@ Para aprofundar o aprendizado, tente implementar estas melhorias:
 - [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/) — O melhor guia de sockets em C
 - [RFC 2616 - HTTP/1.1](https://www.rfc-editor.org/rfc/rfc2616) — Especificação oficial do HTTP/1.1
 - [man pages: socket(2)](https://man7.org/linux/man-pages/man2/socket.2.html) — Documentação oficial das system calls
-
----
-
-## 📄 Licença
-
-Projeto acadêmico para fins educacionais. Uso livre para aprendizado.
