@@ -74,3 +74,12 @@ ightarrow x^2 \)
 ## Desafio Extra
 
 Implemente uma versão onde o vetor transformado **não seja armazenado no processo 0**, mas sim em **todos os processos** usando `MPI_Allgather`.
+
+
+---
+
+## Envio da atividade
+
+Enviar a atividade em PDF contendo os testes em prints (execução) e código-fonte (pode ser um link para um repositório). Mantenha organizado!
+
+Não esqueça de incluir o nome de todos os integrantes no PDF!
