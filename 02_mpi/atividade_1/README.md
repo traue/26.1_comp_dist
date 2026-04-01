@@ -92,3 +92,9 @@ ou...
 mpicc -o soma_quadrados soma_quadrados.c
 mpirun -np 4 ./soma_quadrados
 ```
+
+## Envio da atividade
+
+Enviar a atividade em PDF contendo os testes em prints (execução) e código-fonte (pode ser um link para um repositório). Mantenha organizado!
+
+Não esqueça de incluir o nome de todos os integrantes no PDF!
