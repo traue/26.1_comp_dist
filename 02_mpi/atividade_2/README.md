@@ -87,3 +87,11 @@ Neste caso, cada um dos 4 processos criará um vetor local com 1000 valores alea
 - Use `MPI_Gather` para coletar todas as somas locais no processo 0.
 - Faça um gráfico com a média local de cada processo.
 - Teste com diferentes tamanhos de vetores e número de processos.
+
+---
+
+## Envio da atividade
+
+Enviar a atividade em PDF contendo os testes em prints (execução) e código-fonte (pode ser um link para um repositório). Mantenha organizado!
+
+Não esqueça de incluir o nome de todos os integrantes no PDF!
