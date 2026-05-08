@@ -1,0 +1,33 @@
+# Arquivos de build do Maven
+target/
+bin/
+
+# Maven Wrapper JAR (gerado automaticamente)
+.mvn/wrapper/maven-wrapper.jar
+
+# Código Java gerado pelo protoc (regenerado via `./mvnw generate-sources`)
+blog-proto/target/generated-sources/
+
+# IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.vscode/
+*.launch
+
+# macOS
+.DS_Store
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Variáveis de ambiente locais
+.env
+.env.local
