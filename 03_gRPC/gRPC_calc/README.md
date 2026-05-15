@@ -566,16 +566,3 @@ Forma idiomática do gRPC sinalizar erros (`INVALID_ARGUMENT`, `NOT_FOUND`, etc.
 
 No **VS Code**, pode ser necessário rodar manualmente:
 - `Ctrl+Shift+P` → **Java: Clean Java Language Server Workspace** → **Restart and Delete**.
-
----
-
-# Resumo das correções aplicadas ao projeto original
-
-1. **`exec-maven-plugin` adicionado** — sem ele, `mvn exec:java` não funciona.
-2. **`maven-compiler-plugin` configurado com `<release>17</release>`** — exigência do Java 9+.
-3. **`javax.annotation-api 1.3.2` mantida** — necessária porque o Java 17 removeu esse pacote, mas o código gerado pelo gRPC ainda o referencia.
-4. **gRPC 1.63.0 → 1.68.1** e **protobuf 3.25.3 → 3.25.5** — versões estáveis testadas com Java 17.
-5. **Divisão por zero corrigida** — agora usa `Status.INVALID_ARGUMENT.asRuntimeException()` em vez de `IllegalArgumentException`, para o cliente receber o erro corretamente.
-6. **Servidor com shutdown hook** — encerramento limpo ao usar Ctrl+C.
-7. **Cliente com `awaitTermination`** — evita perda de respostas ao encerrar o canal.
-8. **Try/catch no cliente para `StatusRuntimeException`** — demonstra tratamento de erros do gRPC.
