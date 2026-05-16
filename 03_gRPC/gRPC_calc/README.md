@@ -283,13 +283,14 @@ public class CalculadoraServiceImpl
             CalculadoraRequest request,
             StreamObserver<CalculadoraResponse> responseObserver) {
 
-        double resultado = request.getNumero1() + request.getNumero2();
+        double a = request.getNumero1();
+        double b = request.getNumero2();
+        double resultado = a + b;
 
-        CalculadoraResponse response = CalculadoraResponse.newBuilder()
-                .setResultado(resultado)
-                .build();
+        System.out.printf("[somar]      %.2f + %.2f = %.2f%n", a, b, resultado);
 
-        responseObserver.onNext(response);
+        responseObserver.onNext(CalculadoraResponse.newBuilder()
+                .setResultado(resultado).build());
         responseObserver.onCompleted();
     }
 
@@ -298,13 +299,14 @@ public class CalculadoraServiceImpl
             CalculadoraRequest request,
             StreamObserver<CalculadoraResponse> responseObserver) {
 
-        double resultado = request.getNumero1() - request.getNumero2();
+        double a = request.getNumero1();
+        double b = request.getNumero2();
+        double resultado = a - b;
 
-        CalculadoraResponse response = CalculadoraResponse.newBuilder()
-                .setResultado(resultado)
-                .build();
+        System.out.printf("[subtrair]   %.2f - %.2f = %.2f%n", a, b, resultado);
 
-        responseObserver.onNext(response);
+        responseObserver.onNext(CalculadoraResponse.newBuilder()
+                .setResultado(resultado).build());
         responseObserver.onCompleted();
     }
 
@@ -313,13 +315,14 @@ public class CalculadoraServiceImpl
             CalculadoraRequest request,
             StreamObserver<CalculadoraResponse> responseObserver) {
 
-        double resultado = request.getNumero1() * request.getNumero2();
+        double a = request.getNumero1();
+        double b = request.getNumero2();
+        double resultado = a * b;
 
-        CalculadoraResponse response = CalculadoraResponse.newBuilder()
-                .setResultado(resultado)
-                .build();
+        System.out.printf("[multiplicar] %.2f × %.2f = %.2f%n", a, b, resultado);
 
-        responseObserver.onNext(response);
+        responseObserver.onNext(CalculadoraResponse.newBuilder()
+                .setResultado(resultado).build());
         responseObserver.onCompleted();
     }
 
@@ -328,25 +331,25 @@ public class CalculadoraServiceImpl
             CalculadoraRequest request,
             StreamObserver<CalculadoraResponse> responseObserver) {
 
-        if (request.getNumero2() == 0) {
+        double a = request.getNumero1();
+        double b = request.getNumero2();
 
-            // Usa o protocolo correto do gRPC para erros
+        if (b == 0) {
+            System.out.printf("[dividir]    %.2f ÷ %.2f -> ERRO: divisão por zero%n", a, b);
             responseObserver.onError(
                     Status.INVALID_ARGUMENT
                             .withDescription("Divisão por zero não permitida")
                             .asRuntimeException()
             );
-
             return;
         }
 
-        double resultado = request.getNumero1() / request.getNumero2();
+        double resultado = a / b;
 
-        CalculadoraResponse response = CalculadoraResponse.newBuilder()
-                .setResultado(resultado)
-                .build();
+        System.out.printf("[dividir]    %.2f ÷ %.2f = %.2f%n", a, b, resultado);
 
-        responseObserver.onNext(response);
+        responseObserver.onNext(CalculadoraResponse.newBuilder()
+                .setResultado(resultado).build());
         responseObserver.onCompleted();
     }
 }
@@ -413,6 +416,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class ClienteGrpc {
@@ -429,38 +433,83 @@ public class ClienteGrpc {
             CalculadoraServiceGrpc.CalculadoraServiceBlockingStub stub =
                     CalculadoraServiceGrpc.newBlockingStub(channel);
 
-            CalculadoraRequest request = CalculadoraRequest.newBuilder()
-                    .setNumero1(20)
-                    .setNumero2(10)
-                    .build();
+            Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Soma: " +
-                    stub.somar(request).getResultado());
+            System.out.println("=== Calculadora gRPC ===");
 
-            System.out.println("Subtração: " +
-                    stub.subtrair(request).getResultado());
+            while (true) {
+                System.out.println();
+                System.out.println("Escolha a operação:");
+                System.out.println("  1 - Somar");
+                System.out.println("  2 - Subtrair");
+                System.out.println("  3 - Multiplicar");
+                System.out.println("  4 - Dividir");
+                System.out.println("  0 - Sair");
+                System.out.print("Opção: ");
 
-            System.out.println("Multiplicação: " +
-                    stub.multiplicar(request).getResultado());
+                String opcao = scanner.nextLine().trim();
 
-            System.out.println("Divisão: " +
-                    stub.dividir(request).getResultado());
+                if (opcao.equals("0")) {
+                    System.out.println("Encerrando cliente.");
+                    break;
+                }
 
-            // Teste opcional: divisão por zero
-            CalculadoraRequest requestZero = CalculadoraRequest.newBuilder()
-                    .setNumero1(10)
-                    .setNumero2(0)
-                    .build();
+                if (!opcao.matches("[1-4]")) {
+                    System.out.println("Opção inválida. Tente novamente.");
+                    continue;
+                }
 
-            try {
-                stub.dividir(requestZero);
-            } catch (StatusRuntimeException e) {
-                System.out.println("Erro esperado na divisão por zero: " +
-                        e.getStatus().getDescription());
+                double numero1;
+                double numero2;
+
+                try {
+                    System.out.print("Número 1: ");
+                    numero1 = Double.parseDouble(scanner.nextLine().trim());
+
+                    System.out.print("Número 2: ");
+                    numero2 = Double.parseDouble(scanner.nextLine().trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Valor inválido. Digite um número.");
+                    continue;
+                }
+
+                CalculadoraRequest request = CalculadoraRequest.newBuilder()
+                        .setNumero1(numero1)
+                        .setNumero2(numero2)
+                        .build();
+
+                try {
+                    double resultado;
+                    switch (opcao) {
+                        case "1" -> {
+                            resultado = stub.somar(request).getResultado();
+                            System.out.printf("Resultado: %.2f + %.2f = %.2f%n",
+                                    numero1, numero2, resultado);
+                        }
+                        case "2" -> {
+                            resultado = stub.subtrair(request).getResultado();
+                            System.out.printf("Resultado: %.2f - %.2f = %.2f%n",
+                                    numero1, numero2, resultado);
+                        }
+                        case "3" -> {
+                            resultado = stub.multiplicar(request).getResultado();
+                            System.out.printf("Resultado: %.2f × %.2f = %.2f%n",
+                                    numero1, numero2, resultado);
+                        }
+                        case "4" -> {
+                            resultado = stub.dividir(request).getResultado();
+                            System.out.printf("Resultado: %.2f ÷ %.2f = %.2f%n",
+                                    numero1, numero2, resultado);
+                        }
+                    }
+                } catch (StatusRuntimeException e) {
+                    System.out.println("Erro: " + e.getStatus().getDescription());
+                }
             }
 
+            scanner.close();
+
         } finally {
-            // Encerra o canal corretamente
             channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
         }
     }
@@ -482,6 +531,7 @@ mvn clean package
 Em um terminal:
 
 ```bash
+cd grpc-calculadora
 mvn exec:java -Dexec.mainClass="br.mackenzie.grpc.server.ServidorGrpc"
 ```
 
@@ -494,6 +544,7 @@ Ou, no IntelliJ, clique direito em `ServidorGrpc.java` → **Run 'ServidorGrpc.m
 Em **outro** terminal (com o servidor rodando):
 
 ```bash
+cd grpc-calculadora
 mvn exec:java -Dexec.mainClass="br.mackenzie.grpc.client.ClienteGrpc"
 ```
 
@@ -503,19 +554,41 @@ Ou, no IntelliJ, clique direito em `ClienteGrpc.java` → **Run 'ClienteGrpc.mai
 
 # Saída esperada
 
-**Servidor:**
+**Servidor (com logs de cada chamada):**
 ```text
 Servidor gRPC iniciado na porta 50051
+[somar]      20,00 + 10,00 = 30,00
+[subtrair]   20,00 - 10,00 = 10,00
+[multiplicar] 20,00 × 10,00 = 200,00
+[dividir]    20,00 ÷ 10,00 = 2,00
+[dividir]    10,00 ÷ 0,00 -> ERRO: divisão por zero
 ```
 
-**Cliente:**
+**Cliente (interativo):**
 ```text
-Soma: 30.0
-Subtração: 10.0
-Multiplicação: 200.0
-Divisão: 2.0
-Erro esperado na divisão por zero: Divisão por zero não permitida
+=== Calculadora gRPC ===
+
+Escolha a operação:
+  1 - Somar
+  2 - Subtrair
+  3 - Multiplicar
+  4 - Dividir
+  0 - Sair
+Opção: 1
+Número 1: 20
+Número 2: 10
+Resultado: 20,00 + 10,00 = 30,00
+
+Opção: 4
+Número 1: 10
+Número 2: 0
+Erro: Divisão por zero não permitida
+
+Opção: 0
+Encerrando cliente.
 ```
+
+> O cliente exibe um menu em loop. Digite `0` para sair. Entradas inválidas (letras no lugar de números, opção fora do menu) são tratadas sem encerrar o programa.
 
 ---
 
@@ -555,6 +628,7 @@ Forma idiomática do gRPC sinalizar erros (`INVALID_ARGUMENT`, `NOT_FOUND`, etc.
 | `cannot find symbol: CalculadoraServiceGrpc` (Maven) | `mvn compile` não rodou | Rodar `mvn clean compile` |
 | Imports em vermelho na IDE, mas Maven compila | IDE não enxerga `target/generated-sources` | **IntelliJ:** Maven → Reload Project. **VS Code:** `Java: Clean Java Language Server Workspace` |
 | `Address already in use` | Porta 50051 ocupada | Trocar porta em `ServidorGrpc.java` |
+| `Goal requires a project to execute but there is no POM` | Rodando `mvn` fora da pasta do projeto | Entrar em `cd grpc-calculadora` antes |
 | `UNAVAILABLE: io exception` no cliente | Servidor não está rodando | Subir o servidor primeiro |
 | `protoc` falha ao baixar | Sem internet / firewall corporativo | Verificar conexão e proxy do Maven em `~/.m2/settings.xml` |
 
